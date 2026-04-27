@@ -13,6 +13,8 @@ from .views import (
     MeView,
     ChangePasswordView,
     ProfileView,
+    contact,
+    SystemArchitectureViewSet,
 )
 from django.urls import path
 
@@ -28,11 +30,14 @@ router.register("skills", SkillViewSet, basename="skills")
 router.register(r"soft-skills", SoftSkillViewSet, basename="soft-skill")
 router.register(r"architectures", ArchitectureViewSet)
 router.register(r"articles", ArticleViewSet, basename="article")
-
+router.register(
+    r"system-architectures", SystemArchitectureViewSet, basename="system-architecture"
+)
 urlpatterns = router.urls + [
     path("me/", MeView.as_view(), name="me"),
     path("create-user/", views.create_user, name="create_user"),
     path("profile/", ProfileView.as_view(), name="profile"),
     path("change-password/", ChangePasswordView.as_view(), name="change_password"),
     path("health/", views.health, name="health"),
+    path("contact/", contact, name="contact"),
 ]

@@ -229,3 +229,22 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class SystemArchitecture(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    icon = models.CharField(
+        max_length=255, blank=True
+    )  # e.g., FontAwesome class or image URL
+    order = models.IntegerField(default=0)
+    items_discussed = models.CharField(
+        max_length=500,
+        blank=True,
+        help_text="Comma-separated list of items discussed in this architecture",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    external_link = models.URLField()
+
+    def __str__(self):
+        return self.title

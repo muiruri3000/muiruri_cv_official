@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:15
+    container_name: cv_project-db2
+    env_file:
+      - .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  backend:
+    build: ./cv_backend
+    container_name: cv_project-backend2
+    command: /entrypoint.sh
+    ports:
+      - "8001:8000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+  frontend:
+    build: ./my-digital-canvas
+    container_name: cv_project-frontend2
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:

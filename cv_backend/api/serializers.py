@@ -21,6 +21,7 @@ from .models import (
     ArchitectureService,
     ArchitectureLink,
     Article,
+    SystemArchitecture,
 )
 
 # =========================================================
@@ -420,3 +421,9 @@ class UserSerializer(serializers.ModelSerializer):
 class ChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
+
+
+class SystemArchitectureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SystemArchitecture
+        fields = "__all__"

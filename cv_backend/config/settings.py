@@ -98,7 +98,7 @@ DATABASES = {
         "NAME": os.environ.get("POSTGRES_DB", "cv_db"),
         "USER": os.environ.get("POSTGRES_USER", "cv_user"),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "cv_pass"),
-        "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
+        "HOST": os.environ.get("POSTGRES_HOST", "db"),
         # db should be changed to localhost if running locally and not in container
         "PORT": os.environ.get("POSTGRES_PORT", "5432"),
     }
@@ -128,3 +128,12 @@ USE_I18N = True
 USE_TZ = True
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.zoho.com"
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
+EMAIL_HOST_USER = "jmuiruri@zohomail.com"
+EMAIL_HOST_PASSWORD = "maryM2025!"

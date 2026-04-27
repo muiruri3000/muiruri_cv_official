@@ -10,6 +10,7 @@ from .models import (
     Article,
     About,
     FeaturedProject,
+    SystemArchitecture,
 )
 
 
@@ -22,6 +23,7 @@ admin.site.register(SoftSkill)
 admin.site.register(Article)
 admin.site.register(About)
 admin.site.register(FeaturedProject)
+admin.site.register(SystemArchitecture)
 
 
 class UserProfileAdmin(admin.ModelAdmin):

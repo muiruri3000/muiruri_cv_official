@@ -1,4 +1,5 @@
 import logging
+from unicodedata import name
 
 from django.http import JsonResponse
 from django.contrib.auth.models import User
@@ -9,7 +10,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, SAFE_METHODS
 from rest_framework.permissions import BasePermission
-
+from django.core.mail import send_mail
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
@@ -25,6 +26,7 @@ from .models import (
     SoftSkill,
     Architecture,
     Article,
+    SystemArchitecture,
 )
 
 from .serializers import (
@@ -41,6 +43,7 @@ from .serializers import (
     MyTokenObtainPairSerializer,
     UserSerializer,
     ChangePasswordSerializer,
+    SystemArchitectureSerializer,
 )
 
 logger = logging.getLogger(__name__)
@@ -63,7 +66,7 @@ class RoleProtectedViewSet(viewsets.ModelViewSet):
 # PROFILE (SINGLE INSTANCE)
 # =========================================================
 class ProfileView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = []
 
     def get_object(self, request):
         profile, created = Profile.objects.get_or_create(user=request.user)
@@ -91,9 +94,10 @@ class ProfileView(APIView):
 # =========================================================
 # EXPERIENCE
 # =========================================================
+from rest_framework.viewsets import ModelViewSet
 
 
-class ExperienceViewSet(RoleProtectedViewSet):
+class ExperienceViewSet(ModelViewSet):
     serializer_class = ExperienceSerializer
 
     def get_queryset(self):
@@ -108,7 +112,7 @@ class ExperienceViewSet(RoleProtectedViewSet):
 # =========================================================
 
 
-class EducationViewSet(RoleProtectedViewSet):
+class EducationViewSet(ModelViewSet):
     serializer_class = EducationSerializer
 
     def get_queryset(self):
@@ -129,7 +133,7 @@ class EducationViewSet(RoleProtectedViewSet):
 # =========================================================
 
 
-class AboutViewSet(RoleProtectedViewSet):
+class AboutViewSet(ModelViewSet):
     serializer_class = AboutSerializer
 
     def get_queryset(self):
@@ -175,7 +179,7 @@ class AboutViewSet(RoleProtectedViewSet):
 # =========================================================
 
 
-class HeroViewSet(RoleProtectedViewSet):
+class HeroViewSet(ModelViewSet):
     queryset = Hero.objects.all().order_by("order")
     serializer_class = HeroSerializer
 
@@ -185,7 +189,7 @@ class HeroViewSet(RoleProtectedViewSet):
 # =========================================================
 
 
-class FeaturedProjectViewSet(RoleProtectedViewSet):
+class FeaturedProjectViewSet(ModelViewSet):
     queryset = FeaturedProject.objects.all().order_by("id")
     serializer_class = FeaturedProjectSerializer
 
@@ -195,7 +199,7 @@ class FeaturedProjectViewSet(RoleProtectedViewSet):
 # =========================================================
 
 
-class SkillViewSet(RoleProtectedViewSet):
+class SkillViewSet(ModelViewSet):
 
     queryset = Skill.objects.all()
     serializer_class = SkillSerializer
@@ -206,7 +210,7 @@ class SkillViewSet(RoleProtectedViewSet):
 # =========================================================
 
 
-class SoftSkillViewSet(RoleProtectedViewSet):
+class SoftSkillViewSet(ModelViewSet):
     queryset = SoftSkill.objects.all().order_by("order")
     serializer_class = SoftSkillSerializer
 
@@ -216,7 +220,7 @@ class SoftSkillViewSet(RoleProtectedViewSet):
 # =========================================================
 
 
-class ArchitectureViewSet(RoleProtectedViewSet):
+class ArchitectureViewSet(ModelViewSet):
     queryset = Architecture.objects.all().order_by("-id")
     serializer_class = ArchitectureSerializer
 
@@ -226,7 +230,7 @@ class ArchitectureViewSet(RoleProtectedViewSet):
 # =========================================================
 
 
-class ArticleViewSet(RoleProtectedViewSet):
+class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all().order_by("-created_at")
     serializer_class = ArticleSerializer
 
@@ -349,6 +353,33 @@ class MeView(APIView):
                 "role": profile.role,
             }
         )
+
+
+@api_view(["POST"])
+def contact(request):
+    try:
+        name = request.data.get("name")
+        email = request.data.get("email")
+        message = request.data.get("message")
+
+        send_mail(
+            subject=f"New Contact Form Message from {name}",
+            message=f"Email: {email}\n\nMessage:\n{message}",
+            from_email="jmuiruri@zohomail.com",
+            recipient_list=["jmuiruri@zohomail.com"],
+            fail_silently=False,
+        )
+
+        return Response({"success": True})
+
+    except Exception as e:
+        print("ERROR:", e)
+        return Response({"error": str(e)}, status=500)
+
+
+class SystemArchitectureViewSet(ModelViewSet):
+    queryset = SystemArchitecture.objects.all().order_by("-created_at")
+    serializer_class = SystemArchitectureSerializer
 
 
 # =========================================================
