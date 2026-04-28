@@ -25,6 +25,8 @@ COPY . .
 # COPY entrypoint.sh /entrypoint.sh
 # RUN chmod +x /entrypoint.sh
 
+python manage.py migrate
+gunicorn cv_backend.wsgi:application --bind 0.0.0.0:8000
 # 7️⃣ Expose port
 EXPOSE 8000
 
