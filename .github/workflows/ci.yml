@@ -16,7 +16,8 @@ jobs:
         env:
           POSTGRES_DB: cv_db
           POSTGRES_USER: cv_user
-          POSTGRES_PASSWORD: postgres12345
+          POSTGRES_PASSWORD: postgres123
+          POSTGRES_HOST: postgres
 
         options: >-
           --health-cmd="pg_isready -U cv_user"  --health-interval=10s  --health-timeout=5s  --health-retries=5
