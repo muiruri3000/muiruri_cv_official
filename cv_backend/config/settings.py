@@ -97,8 +97,8 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.environ.get("POSTGRES_DB", "cv_db"),
         "USER": os.environ.get("POSTGRES_USER", "cv_user"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "cv_pass"),
-        "HOST": os.environ.get("POSTGRES_HOST", "db"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "postgres123"),
+        "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
         # db should be changed to localhost if running locally and not in container
         "PORT": os.environ.get("POSTGRES_PORT", "5432"),
     }
