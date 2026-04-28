@@ -66,11 +66,11 @@ jobs:
       with:
         node-version: '20'
     - name: Install React dependencies
-      working-directory: /my-digital-canvas
+      working-directory: ./my-digital-canvas
       run: |
         npm install
 
     - name: Build React app
-      working-directory: /my-digital-canvas
+      working-directory: ./my-digital-canvas
       run: |
         npm run build
