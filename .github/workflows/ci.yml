@@ -17,7 +17,7 @@ jobs:
           POSTGRES_DB: cv_db
           POSTGRES_USER: cv_user
           POSTGRES_PASSWORD: postgres123
-          POSTGRES_HOST: postgres #change back to db | localhost
+          POSTGRES_HOST: 127.0.0.1 #change back to db | localhost
           POSTGRES_PORT: 5432
         ports:
         - 5432:5432
@@ -51,7 +51,7 @@ jobs:
     - name: Inspect network
       run: |
         cat /etc/hosts
-        ping -c 2 postgres || true
+        ping -c 2 postgres ||  true
 
     - name: Run Django migrations
       working-directory: ./cv_backend
