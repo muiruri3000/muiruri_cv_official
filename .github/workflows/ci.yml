@@ -17,7 +17,6 @@ jobs:
           POSTGRES_DB: cv_db
           POSTGRES_USER: cv_user
           POSTGRES_PASSWORD: postgres123
-          POSTGRES_HOST: postgres
 
         options: >-
           --health-cmd="pg_isready -U cv_user"  --health-interval=10s  --health-timeout=5s  --health-retries=5
@@ -38,7 +37,7 @@ jobs:
     - name: Run Django migrations
       working-directory: ./cv_backend
       env:
-        DATABASE_URL: postgres://cv_user:postgres12345@postgres:5432/cv_db
+        DATABASE_URL: postgres://cv_user:postgres123@postgres:5432/cv_db
       run: |
         python manage.py migrate
 
