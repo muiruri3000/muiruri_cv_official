@@ -91,31 +91,26 @@ CACHES = {
 }
 WSGI_APPLICATION = "config.wsgi.application"
 
-# Database
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": os.environ.get("POSTGRES_DB", "cv_db"),
-#         "USER": os.environ.get("POSTGRES_USER", "cv_user"),
-#         "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "postgres123"),
-#         "HOST": os.environ.get("POSTGRES_HOST", "127.0.0.1"),
-#         # db should be changed to localhost if running locally and not in container
-#         "PORT": os.environ.get("POSTGRES_PORT", "5432"),
-#     }
-
-
-# }
-
 import dj_database_url
 import os
 
-DATABASES = {
-    "default": dj_database_url.config(
-        default=os.environ.get("DATABASE_URL"),
-        conn_max_age=600,
-    )
-}
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
+if DATABASE_URL:
+    # Used in Render (production)
+    DATABASES = {"default": dj_database_url.parse(DATABASE_URL, conn_max_age=600)}
+else:
+    # Used in CI / local
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.environ.get("POSTGRES_DB", "cv_db"),
+            "USER": os.environ.get("POSTGRES_USER", "cv_user"),
+            "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "postgres123"),
+            "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
+            "PORT": os.environ.get("POSTGRES_PORT", "5432"),
+        }
+    }
 # Static files
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
