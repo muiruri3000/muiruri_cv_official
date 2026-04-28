@@ -35,12 +35,12 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Wait for Postgres
-      run: |
-        until pg_isready -h postgres -p 5432 -U cv_user; do
-          echo "Waiting for postgres..."
-          sleep 2
-        done
+    # - name: Wait for Postgres
+    #   run: |
+    #     until pg_isready -h postgres -p 5432 -U cv_user; do
+    #       echo "Waiting for postgres..."
+    #       sleep 2
+    #     done
     - name: Run Django migrations
       working-directory: ./cv_backend
 
