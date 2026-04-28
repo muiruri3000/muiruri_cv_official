@@ -92,16 +92,28 @@ CACHES = {
 WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": os.environ.get("POSTGRES_DB", "cv_db"),
+#         "USER": os.environ.get("POSTGRES_USER", "cv_user"),
+#         "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "postgres123"),
+#         "HOST": os.environ.get("POSTGRES_HOST", "127.0.0.1"),
+#         # db should be changed to localhost if running locally and not in container
+#         "PORT": os.environ.get("POSTGRES_PORT", "5432"),
+#     }
+
+
+# }
+
+import dj_database_url
+import os
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("POSTGRES_DB", "cv_db"),
-        "USER": os.environ.get("POSTGRES_USER", "cv_user"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "postgres123"),
-        "HOST": os.environ.get("POSTGRES_HOST", "127.0.0.1"),
-        # db should be changed to localhost if running locally and not in container
-        "PORT": os.environ.get("POSTGRES_PORT", "5432"),
-    }
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"),
+        conn_max_age=600,
+    )
 }
 
 # Static files
