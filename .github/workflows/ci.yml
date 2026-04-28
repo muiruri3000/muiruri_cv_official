@@ -17,6 +17,8 @@ jobs:
           POSTGRES_DB: cv_db
           POSTGRES_USER: cv_user
           POSTGRES_PASSWORD: postgres123
+          POSTGRES_HOST: postgres #change back to db | localhost
+          POSTGRES_PORT: 5432
         ports:
         - 5432:5432
         options: >-
@@ -41,6 +43,16 @@ jobs:
     #       echo "Waiting for postgres..."
     #       sleep 2
     #     done
+
+
+    - name: Debug Docker services
+      run: docker ps -a
+
+    - name: Inspect network
+      run: |
+        cat /etc/hosts
+        ping -c 2 postgres || true
+
     - name: Run Django migrations
       working-directory: ./cv_backend
 
