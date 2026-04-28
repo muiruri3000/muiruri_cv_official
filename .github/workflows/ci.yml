@@ -17,16 +17,15 @@ jobs:
           POSTGRES_DB: cv_db
           POSTGRES_USER: cv_user
           POSTGRES_PASSWORD: postgres12345
-        ports:
-        - 5432:5432
+
         options: >-
-          --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=5
+          --health-cmd="pg_isready -U cv_user"  --health-interval=10s  --health-timeout=5s  --health-retries=5
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: '3.11'
 
@@ -38,7 +37,7 @@ jobs:
     - name: Run Django migrations
       working-directory: ./cv_backend
       env:
-        DATABASE_URL: postgres://cv_user:postgres12345@localhost:5432/cv_db
+        DATABASE_URL: postgres://cv_user:postgres12345@postgres:5432/cv_db
       run: |
         python manage.py migrate
 
