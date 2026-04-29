@@ -45,7 +45,7 @@ api.interceptors.request.use(
 );
 
 /* ---------------- RESPONSE INTERCEPTOR ---------------- */
-
+console.log("API URL:", import.meta.env.VITE_API_URL);
 api.interceptors.response.use(
   (response: AxiosResponse) => response,
 
