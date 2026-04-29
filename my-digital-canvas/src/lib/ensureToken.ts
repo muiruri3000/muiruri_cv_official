@@ -1,6 +1,7 @@
 import axios from "axios";
 
 
+const API_URL = `${import.meta.env.VITE_API_URL}/api/`;
 export const ensureToken = async () => {
   let token = localStorage.getItem("access");
 
@@ -9,7 +10,7 @@ export const ensureToken = async () => {
     if (!refresh) return null;
 
     const res = await axios.post(
-      "http://localhost:8000/api/token/refresh/",
+      `${API_URL}token/refresh/`,
       { refresh }
     );
 
