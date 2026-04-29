@@ -33,32 +33,6 @@ type Props={
 
 const BlogSection = ({articles}) => {
 
-// const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-  
-
-
-// useEffect(() => {
-//   const fetchBlogPosts = async () => {
-//     try {
-//       if (!localStorage.getItem("access")) {
-//         await getToken();
-//       }
-
-//       const response = await api.get<BlogPost[]>('/articles/');
-
-//       console.log('blog posts response: ', response.data);
-//       setBlogPosts(Array.isArray(response.data) ? response.data : [response.data]);
-
-//       console.log('blog posts results: ', blogPosts);
-//     } catch (err: any) {
-//       console.error("Failed to fetch blog posts data", err.response?.data || err.message);
-//       throw err;
-//     }
-//   };
-
-//   fetchBlogPosts();
-// } , []);  
-console.log('articles data: ', articles)
 
 
 return (

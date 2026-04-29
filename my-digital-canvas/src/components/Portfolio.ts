@@ -2,6 +2,8 @@ import api from "@/lib/api";
 import { ensureToken } from "@/lib/ensureToken";
 export const fetchPortfolioData = async () => {
 
+
+  console.log("API URL:", import.meta.env.VITE_API_URL);
   await ensureToken()
   const [
     experience,
