@@ -6,9 +6,10 @@ import axios, {
 } from "axios";
 import { useEffect } from "react";
 
+const API_URL = `${import.meta.env.VITE_API_URL}/api/`;
 /* ---------------- API INSTANCE ---------------- */
 const api: AxiosInstance = axios.create({
-  baseURL: "http://localhost:8001/api",
+  baseURL: `${API_URL}`,
 });
 
 /* ---------------- REQUEST INTERCEPTOR ---------------- */
@@ -17,7 +18,7 @@ const api: AxiosInstance = axios.create({
 
 
 export const getToken = async () => {
-  const res = await axios.post("http://localhost:8001/api/token/", {
+  const res = await axios.post(`${API_URL}token/`, {
     username: "Joseph",
     password: "joseph12345!",
   })
@@ -78,7 +79,7 @@ api.interceptors.response.use(
             }
 
             const res = await axios.post(
-              "http://localhost:8001/api/token/refresh/",
+              `${API_URL}token/refresh/`,
               { refresh }
             );
 

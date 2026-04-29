@@ -10,7 +10,7 @@ const ContactSection = () => {
     e.preventDefault();
     // Placeholder — wire up to a backend
     try{
-      const response = await api.post("/contact/", form);
+      const response = await api.post("contact/", form);
     alert("Message sent! I'll get back to you soon.");
     setForm({ name: "", email: "", message: "" });
     }catch(err){

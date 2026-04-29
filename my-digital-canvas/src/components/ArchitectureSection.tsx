@@ -24,28 +24,27 @@ type Architecture = {
 const ArchitectureSection = () => {
   const [architectures, setArchitectures] = useState<Architecture[]>([]);
 
-  useEffect(() => {
-    const fetchArchitectures = async () => {
-      try {
-        if (!localStorage.getItem("access")) {
-          await getToken();
-        }
-
-        const response = await api.get<Architecture[]>("/system-architectures/");
-        setArchitectures(
-          Array.isArray(response.data) ? response.data : [response.data]
-        );
-      } catch (err: any) {
-        console.error(
-          "Failed to fetch architectures data",
-          err.response?.data || err.message
-        );
-        throw err;
+useEffect(() => {
+  const fetchArchitectures = async () => {
+    try {
+      if (!localStorage.getItem("access")) {
+        await getToken();
       }
-    };
 
-    fetchArchitectures();
-  }, []);
+      const response = await api.get<Architecture[]>("/system-architectures/");
+      setArchitectures(
+        Array.isArray(response.data) ? response.data : [response.data]
+      );
+    } catch (err: any) {
+      console.error(
+        "Failed to fetch architectures data",
+        err.response?.data || err.message
+      );
+    }
+  };
+
+  fetchArchitectures();
+}, []);
 
   return (
     <section id="architecture" className="py-24">
