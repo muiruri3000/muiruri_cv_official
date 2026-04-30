@@ -22,7 +22,8 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "False").lower() == "true"
 
 
 ALLOWED_HOSTS = ["*"]  # Allow all hosts for development; restrict in production
-
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 # Installed apps
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -64,6 +65,13 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
 }
 CORS_ALLOW_ALL_ORIGINS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://cv-backend-0088.onrender.com",
+]
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 
 ROOT_URLCONF = "config.urls"
 
