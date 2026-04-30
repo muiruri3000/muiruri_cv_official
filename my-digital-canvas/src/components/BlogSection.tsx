@@ -2,7 +2,7 @@ import { Calendar, ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import api from "../lib/api";
 import { getToken } from "../lib/api";
-
+import { Link } from "react-router-dom";
 type BlogPost = {
   id: number;
   title: string;
@@ -43,10 +43,15 @@ return (
 
         <div className="grid md:grid-cols-3 gap-6">
           {articles.map((post, i) => (
+            
+            <Link 
+            to={`/blog/${post.slug}`}
+              key={post.id}
+              className='block'  
+              >
             <article
-              key={i}
               className="card-gradient rounded-xl border border-border p-6 hover:border-primary/30 transition-all group cursor-pointer hover:-translate-y-1"
-            >
+              >
               <div className="flex items-center justify-between mb-4">
                 <span className="px-2.5 py-1 rounded-md bg-primary/10 text-primary text-xs font-medium">
                   {post.tags}
@@ -70,6 +75,7 @@ return (
                 <span></span>
               </div>
             </article>
+              </Link>
           ))}
         </div>
       </div>

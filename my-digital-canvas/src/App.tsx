@@ -9,7 +9,7 @@ import Index from "./pages/Index.tsx";
 import Login from "./pages/Login.tsx";
 import Admin from "./pages/Admin.tsx";
 import NotFound from "./pages/NotFound.tsx";
-
+import BlogPost from "./pages/BlogPost.tsx";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -24,6 +24,7 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>
