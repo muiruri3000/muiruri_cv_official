@@ -37,7 +37,7 @@ const AboutSection = () => {
           </div>
           <div className="card-gradient bg-secondary/30 border border-border rounded-xl p-6">
             <div className="text-3xl font-bold text-gradient mb-1">5+</div>
-            <div className="text-sm text-muted-foreground">Project Manager</div>
+            <div className="text-sm text-muted-foreground">Projects completed</div>
           </div>
           <div className="card-gradient bg-secondary/30 border border-border rounded-xl p-6">
             <div className="text-3xl font-bold text-gradient mb-1">6+</div>
