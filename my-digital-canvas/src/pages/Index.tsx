@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import EducationSection from "@/components/EducationSection";
 import ArchitectureSection from "@/components/ArchitectureSection";
@@ -41,6 +42,7 @@ useEffect(() => {
     <div className="min-h-screen ">
       <Navbar />
        <div className="max-w-6xl mx-auto px-6">
+      <AboutSection />
       <HeroSection  {...data?.hero}/>
       <ExperienceSection experiences={data?.experiences ?? []}/>
       <EducationSection education={data?.education}/>
