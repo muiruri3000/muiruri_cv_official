@@ -112,7 +112,7 @@ try {
                   : "bg-primary text-primary-foreground hover:opacity-90 glow"
               }`}
             >
-              <Send size={14} />
+              
               
                {sent ? <Check size={14} /> : <Send size={14} />}
               {sent ? "Message Sent" : "Send Message"}
