@@ -1,25 +1,27 @@
 import { useState } from "react";
-import { Mail, MapPin, Send, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail, MapPin, Send, Check,Github, Linkedin, Twitter } from "lucide-react";
 import api from "../lib/api";
 
 
 const ContactSection = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sent, setSent] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Placeholder — wire up to a backend
-    try{
-      const response = await api.post("contact/", form);
-    alert("Message sent! I'll get back to you soon.");
-    setForm({ name: "", email: "", message: "" });
-    }catch(err){
+try {
+      await api.post("/contact/", form);
+    } catch (err: any) {
       console.error("Failed to send message", err.response?.data || err.message);
-      alert("Failed to send message. Please try again later.");
     }
-    
-    
+    setSent(true);
+    setForm({ name: "", email: "", message: "" });
+    setTimeout(() => setSent(false), 3000);
   };
+    
+    
+  
 
   return (
     <section id="contact" className="py-24">
@@ -103,10 +105,17 @@ const ContactSection = () => {
             </div>
             <button
               type="submit"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity glow"
+              disabled={sent}
+              className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                sent
+                  ? "bg-green-600 text-white"
+                  : "bg-primary text-primary-foreground hover:opacity-90 glow"
+              }`}
             >
               <Send size={14} />
-              Send Message
+              
+               {sent ? <Check size={14} /> : <Send size={14} />}
+              {sent ? "Message Sent" : "Send Message"}
             </button>
           </form>
         </div>
