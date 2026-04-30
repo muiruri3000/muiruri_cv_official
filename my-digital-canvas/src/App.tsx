@@ -10,6 +10,7 @@ import Login from "./pages/Login.tsx";
 import Admin from "./pages/Admin.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import BlogPost from "./pages/BlogPost.tsx";
+import ArchitectureDetail from "./pages/ArchitectureDetail.tsx";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/architecture/:slug" element={<ArchitectureDetail />} />
           </Routes>
         </AuthProvider>
       </BrowserRouter>

@@ -2,7 +2,7 @@ import { Server, Database, Globe, Cloud, Shield, Zap } from "lucide-react";
 import api from "../lib/api";
 import { useEffect, useState } from "react";
 import { getToken } from "../lib/api";
-
+import { Link } from "react-router-dom";
 const iconMap: { [key: string]: any } = {
   Server,
   Database,
@@ -19,9 +19,15 @@ type Architecture = {
   description: string;
   items_discussed: string;
   external_link: string;
+  slug?: string;
+  body?: string;  
 };
 
-const ArchitectureSection = () => {
+type Props = {
+  systemArchitectures: Architecture[]
+}
+
+const ArchitectureSection = ({systemArchitectures}: Props) => {
   const [architectures, setArchitectures] = useState<Architecture[]>([]);
 
 useEffect(() => {
@@ -59,13 +65,10 @@ useEffect(() => {
             const Icon = iconMap[d.icon] || Server;
 
             return (
-              <a
-              key={d.id}
-              href={d.external_link}
-              target="_blank"
-              rel="noopener noreferrer"
-              >
-
+         
+              <Link to={`/architecture/${d.slug}`} key={d.id} className='block'>            
+              
+              
               <div
                 key={d.id}
                 className="card-gradient rounded-xl border border-border p-6 hover:border-primary/30 transition-all group hover:-translate-y-1"
@@ -98,7 +101,7 @@ useEffect(() => {
                     ))}
                 </div>
               </div>
-              </a>
+              </Link>
             );
           })}
         </div>

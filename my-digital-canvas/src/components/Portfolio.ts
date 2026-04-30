@@ -11,6 +11,7 @@ export const fetchPortfolioData = async () => {
     articles,
     skills,
     softSkills,
+    systemArchitectures,
     hero,
   ] = await Promise.all([
     api.get("/experiences/"),
@@ -18,6 +19,7 @@ export const fetchPortfolioData = async () => {
     api.get("/articles/"),
     api.get("/skills/"),
     api.get("/soft-skills/"),
+    api.get("/system-architectures/"),
     api.get("/hero/"),
   ]);
 
@@ -28,5 +30,6 @@ export const fetchPortfolioData = async () => {
     skills: skills.data,
     softSkills: softSkills.data,
     hero: hero.data,
+    systemArchitectures: systemArchitectures.data,
   };
 };

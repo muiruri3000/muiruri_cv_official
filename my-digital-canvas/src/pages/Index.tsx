@@ -46,7 +46,7 @@ useEffect(() => {
       <HeroSection  {...data?.hero}/>
       <ExperienceSection experiences={data?.experiences ?? []}/>
       <EducationSection education={data?.education}/>
-      <ArchitectureSection />
+      <ArchitectureSection systemArchitectures={data?.systemArchitectures ?? []} />
       <SkillsSection 
       skill={data?.skills ?? []}
       softSkill={data?.softSkills ?? []}
