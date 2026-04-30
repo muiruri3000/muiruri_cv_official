@@ -6,6 +6,7 @@ import { ensureToken } from "@/lib/ensureToken";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { sampleArticles } from "@/data/SampleArticles";
+import { parseTags } from "@/utils/tags";
 
 type BlogPost = {
   id: number;
@@ -81,11 +82,19 @@ const BlogPost = () => {
 
         {post && (
           <article>
-            {post.tags && (
-              <span className="px-2.5 py-1 rounded-md bg-primary/10 text-primary text-xs font-medium">
-                {post.tags}
-              </span>
-            )}
+                            {post.tags && (
+                <div className="flex flex-wrap gap-2">
+                    {parseTags(post.tags)
+                    .map((tag, i) => (
+                        <span
+                        key={i}
+                        className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 transition-colors"
+                        >
+                        {tag}
+                        </span>
+                    ))}
+                </div>
+                )}
             <h1 className="text-3xl md:text-4xl font-bold mt-4 mb-3 leading-tight">
               {post.title}
             </h1>

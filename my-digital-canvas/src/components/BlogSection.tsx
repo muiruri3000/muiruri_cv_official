@@ -2,6 +2,7 @@ import { Calendar, ArrowUpRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import api from "../lib/api";
 import { getToken } from "../lib/api";
+import { parseTags } from "@/utils/tags";
 import { Link } from "react-router-dom";
 type BlogPost = {
   id: number;
@@ -53,9 +54,18 @@ return (
               className="card-gradient rounded-xl border border-border p-6 hover:border-primary/30 transition-all group cursor-pointer hover:-translate-y-1"
               >
               <div className="flex items-center justify-between mb-4">
-                <span className="px-2.5 py-1 rounded-md bg-primary/10 text-primary text-xs font-medium">
-                  {post.tags}
-                </span>
+               {post.tags && (
+  <div className="flex flex-wrap gap-2">
+    {parseTags(post.tags).map((tag, i) => (
+      <span
+        key={i}
+        className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 transition-colors"
+      >
+        {tag}
+      </span>
+    ))}
+  </div>
+)}
                 <ArrowUpRight size={16} className="text-muted-foreground group-hover:text-primary transition-colors" />
               </div>
 
