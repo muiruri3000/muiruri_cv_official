@@ -36,11 +36,11 @@ const AboutSection = () => {
             <div className="text-sm text-muted-foreground">Years of experience</div>
           </div>
           <div className="card-gradient bg-secondary/30 border border-border rounded-xl p-6">
-            <div className="text-3xl font-bold text-gradient mb-1">20+</div>
-            <div className="text-sm text-muted-foreground">Projects delivered</div>
+            <div className="text-3xl font-bold text-gradient mb-1">5+</div>
+            <div className="text-sm text-muted-foreground">Project Manager</div>
           </div>
           <div className="card-gradient bg-secondary/30 border border-border rounded-xl p-6">
-            <div className="text-3xl font-bold text-gradient mb-1">10+</div>
+            <div className="text-3xl font-bold text-gradient mb-1">6+</div>
             <div className="text-sm text-muted-foreground">Technologies mastered</div>
           </div>
         </div>
